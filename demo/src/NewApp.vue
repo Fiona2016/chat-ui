@@ -98,18 +98,19 @@ export default {
           Object.assign(
             {},
             {
-              type: 'text',
-              author: 'support',
-              id: Math.random(),
-              data: {
-                text: '...'
-              }
+              type: 'typing',
+              author: 'support'
             }
           )
         ]
         // 发送请求
         const result = await sendPrompt(text)
-        this.messageList[this.messageList.length - 1].data.text = result.content
+        this.messageList[this.messageList.length - 1] = {
+          type: 'text',
+          author: 'support',
+          id: Math.random(),
+          data: {text: result.content}
+        }
       } catch (e) {
         console.error('error!', e)
       }
