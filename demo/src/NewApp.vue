@@ -92,9 +92,7 @@ export default {
       try {
         // 添加一条信息
         this.messageList = [...this.messageList, Object.assign({}, message, {id: Math.random()})]
-        // 发送请求
-        const result = await sendPrompt(text)
-        console.log('onMessageWasSent', message)
+        // 发送请求之前，先添加一条信息
         this.messageList = [
           ...this.messageList,
           Object.assign(
@@ -104,11 +102,14 @@ export default {
               author: 'support',
               id: Math.random(),
               data: {
-                text: result.content
+                text: '...'
               }
             }
           )
         ]
+        // 发送请求
+        const result = await sendPrompt(text)
+        this.messageList[this.messageList.length - 1].data.text = result.content
       } catch (e) {
         console.error('error!', e)
       }

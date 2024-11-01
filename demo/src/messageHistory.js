@@ -5,6 +5,6 @@ export default [
     author: `support`,
     id: 'support',
     data: {text: `您好，有什么可以帮您 `},
-    suggestions: ['智能体有哪些', '商品如何定价呢']
+    suggestions: ['可以帮我介绍一下服务吗？', '商品如何定价呢？']
   }
 ]

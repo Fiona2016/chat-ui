@@ -1,12 +1,11 @@
-// import request from './request'
+import request from './request'
 import {responseBody} from './mock'
-export function sendPrompt(message, sessionId) {
+import {aiAskUrl} from './config'
+export async function sendPrompt(message, sessionId) {
   // mock
-  return responseBody
-
-  // request.post({
-  //   shop_owner: '',
-  //   prompt: message,
-  //   session_id: sessionId || undefined // fixme 这里，如果有sessionID, 就传入，否则开启新会话
-  // })
+  // return responseBody
+  return await request.post(aiAskUrl, {
+    shop_owner: 'ym',
+    prompt: message
+  })
 }
