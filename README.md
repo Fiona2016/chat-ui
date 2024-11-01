@@ -132,12 +132,14 @@ export default {
   },
   methods: {
     sendMessage (text) {
+      console.log('sendMessage!', 'text', text)
       if (text.length > 0) {
         this.newMessagesCount = this.isChatOpen ? this.newMessagesCount : this.newMessagesCount + 1
         this.onMessageWasSent({ author: 'support', type: 'text', data: { text } })
       }
     },
     onMessageWasSent (message) {
+      console.log('onMessageWasSent', message)
       // called when the user sends a message
       this.messageList = [ ...this.messageList, message ]
     },
