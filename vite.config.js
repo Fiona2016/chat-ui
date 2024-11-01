@@ -5,9 +5,7 @@ const path = require('path')
 
 module.exports = {
   outDir: 'dist',
-  plugins: [
-    vue()
-  ],
+  plugins: [vue()],
   build: {
     lib: {
       entry: path.resolve(__dirname, 'src/index.js'),

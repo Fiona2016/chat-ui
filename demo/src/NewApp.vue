@@ -42,7 +42,8 @@ export default {
   data() {
     return {
       participants: chatParticipants,
-      titleImageUrl: 'https://a.slack-edge.com/66f9/img/avatars-teams/ava_0001-34.png',
+      titleImageUrl:
+        'https://img.alicdn.com/imgextra/i2/O1CN01aLQksL1z1aOIMW0i1_!!6000000006654-2-tps-200-200.png',
       messageList: messageHistory,
       newMessagesCount: 0,
       isChatOpen: false,
@@ -160,60 +161,8 @@ body {
   font-family: Avenir Next, Helvetica Neue, Helvetica, sans-serif;
 }
 
-.demo-description {
-  max-width: 500px;
-}
-
-.demo-description img {
-  max-width: 500px;
-}
-
-.demo-test-area {
-  width: 300px;
-  box-sizing: border-box;
-}
-
-.demo-test-area--text {
-  box-sizing: border-box;
-  width: 100%;
-  margin: 0px;
-  padding: 0px;
-  resize: none;
-  font-family: Avenir Next, Helvetica Neue, Helvetica, sans-serif;
-  background: #fafbfc;
-  color: #8da2b5;
-  border: 1px solid #dde5ed;
-  font-size: 16px;
-  padding: 16px 15px 14px;
-  margin: 0;
-  border-radius: 6px;
-  outline: none;
-  height: 150px;
-  margin-bottom: 10px;
-}
-
-.demo-monster-img {
-  width: 400px;
-  display: block;
-  margin: 60px auto;
-}
-
-.text-center {
-  text-align: center;
-}
-
-.colors a {
-  color: #fff;
-  text-decoration: none;
-  padding: 4px 10px;
-  border-radius: 10px;
-}
-
-.toggle a {
-  text-decoration: none;
-}
-
-.messageStyling {
-  font-size: small;
+p {
+  margin-block-start: 0;
+  margin-block-end: 0;
 }
 </style>

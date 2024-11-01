@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { JWT } from "../const/const";
 import {aiAskUrl} from './config'
 
 let sessionId = undefined // 首次会话不带session, 后续对话将session带过去
@@ -21,7 +22,7 @@ instance.interceptors.request.use(
       config.data['session_id'] = sessionId
     }
     // 例如，添加一个 Authorization 头部
-    // config.headers.Authorization = `Bearer your_token`
+    config.headers.Authorization = JWT
     return config
   },
   (error) => {
