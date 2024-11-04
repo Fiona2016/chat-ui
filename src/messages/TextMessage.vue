@@ -26,6 +26,7 @@
     </div>
 
     <slot :message="message" :messageText="messageText" :messageColors="messageColors" :me="me">
+      hello 这里是渲染的内容测试一下
       <div class="sc-message--text-content" v-html="messageText"></div>
       <p v-if="message.data.meta" class="sc-message--meta" :style="{color: messageColors.color}">
         {{ message.data.meta }}
@@ -81,6 +82,7 @@ export default {
   },
   computed: {
     messageText() {
+      console.log('messageText', this.message.data.text)
       const escaped = escapeGoat.escape(this.message.data.text)
 
       return Autolinker.link(this.messageStyling ? fmt(escaped) : escaped, {

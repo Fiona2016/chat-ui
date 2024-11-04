@@ -10,7 +10,7 @@
     "dev": "vue-cli-service serve ./demo/src/main.js",
     "build:prod": "vite build",
     "lint": "vue-cli-service lint",
-    "build:dev": "npm run build -- --mode development --watch",
+    "build:dev": "npm run build:prod -- --mode development --watch",
     "prepublishOnly": "npm run build:prod"
   },
   "files": [
@@ -48,10 +48,9 @@
     "eslint-plugin-vue": "^6.2.2",
     "lint-staged": "^10.4.2",
     "node-forge": "^0.10.0",
-    "node-sass": "^7.0.1",
     "prettier": "^2.0.2",
     "sass": "^1.54.8",
-    "sass-loader": "^12.4.0",
+    "sass-loader": "^10.0.3",
     "vite": "^2.2.4",
     "vue": "^3.0.11"
   },

@@ -10,7 +10,7 @@
     >
       <slot name="user-avatar" :message="message" :user="user">
         <div
-          v-if="message.type !== 'system' && authorName && authorName !== 'me'"
+          v-if="message.type !== 'system'"
           v-tooltip="authorName"
           :title="authorName"
           class="sc-message--avatar"

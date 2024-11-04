@@ -26,6 +26,10 @@
       <template v-slot:header>
         AI助手
       </template>
+      <template v-slot:text-message-body="scopedProps">
+        <!-- render html -->
+        <div class="sc-message--text-content" v-html="scopedProps.message.data.text"></div>
+      </template>
     </beautiful-chat>
   </div>
 </template>
