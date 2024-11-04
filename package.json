@@ -1,7 +1,7 @@
 {
   "name": "vue3-beautiful-chat",
   "version": "3.3.1",
-  "description": "A simple and beautiful Vue 3 chat component backend agnostic.",
+  "description": "A simple and beautiful Vue 3 chat component",
   "main": "index.js",
   "repository": "",
   "author": "Fiona",
@@ -61,7 +61,7 @@
     "vue-js-chat"
   ],
   "bugs": {
-    "url": "https://github.com/Sitronik/vue3-beautiful-chat/issues"
+    "url": ""
   },
   "lint-staged": {
     "*.{js,vue}": "vue-cli-service lint"
