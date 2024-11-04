@@ -16,7 +16,7 @@ module.exports = {
       external: ['vue'],
       output: [
         {
-          assetFileNames: 'vue-beatiful-chat.css',
+          assetFileNames: 'vue3-beatiful-chat.css',
           format: 'umd',
           globals: {
             vue: 'Vue'

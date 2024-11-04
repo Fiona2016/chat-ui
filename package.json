@@ -8,6 +8,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "vue-cli-service serve ./demo/src/main.js",
+    "build:demo": "vue-cli-service build ./demo/src/main.js",
     "build:prod": "vite build",
     "lint": "vue-cli-service lint",
     "build:dev": "npm run build:prod -- --mode development --watch",
