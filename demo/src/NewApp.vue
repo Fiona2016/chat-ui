@@ -42,8 +42,7 @@ export default {
   data() {
     return {
       participants: chatParticipants,
-      titleImageUrl:
-        'https://img.alicdn.com/imgextra/i2/O1CN01aLQksL1z1aOIMW0i1_!!6000000006654-2-tps-200-200.png',
+      titleImageUrl: '',
       messageList: messageHistory,
       newMessagesCount: 0,
       isChatOpen: false,
