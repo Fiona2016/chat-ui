@@ -1,12 +1,10 @@
 import axios from 'axios'
-import { JWT } from "../const/const";
-import {aiAskUrl} from './config'
+import {JWT} from '../const/const'
 
 let sessionId = undefined // 首次会话不带session, 后续对话将session带过去
 
 // 创建 axios 实例
 const instance = axios.create({
-  // baseURL: aiAskUrl, // 设置默认的 baseURL
   timeout: 60 * 1000 // 设置默认的超时时间
 })
 
@@ -15,6 +13,7 @@ instance.interceptors.request.use(
   (config) => {
     console.log('config', config)
     // 在发送请求之前做些什么
+    console.log('config.request', config.request)
     console.log('Sending request to:', config.url)
     console.log('config.data', config.data)
     // 如果有sessionId，每次发送前带上
@@ -22,7 +21,9 @@ instance.interceptors.request.use(
       config.data['session_id'] = sessionId
     }
     // 例如，添加一个 Authorization 头部
-    config.headers.Authorization = JWT
+    // 🤷🏻‍♀️ 先改为在params里面加
+    // config.request.config.headers.Authorization = JWT
+    config.params = {authentication: JWT}
     return config
   },
   (error) => {
@@ -65,5 +66,10 @@ instance.interceptors.response.use(
     return Promise.reject(error)
   }
 )
+const errorMap = {
+  400: '请稍后再尝试',
+  401: '请重新登录',
+  399: '请稍后再尝试'
+}
 
 export default instance
