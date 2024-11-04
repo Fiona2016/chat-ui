@@ -3,8 +3,8 @@
   "version": "3.3.1",
   "description": "A simple and beautiful Vue 3 chat component backend agnostic.",
   "main": "index.js",
-  "repository": "https://github.com/Sitronik/vue3-beautiful-chat.git",
-  "author": "Sitronik <sitronik92@mail.ru>",
+  "repository": "",
+  "author": "Fiona",
   "license": "MIT",
   "scripts": {
     "dev": "vue-cli-service serve ./demo/src/main.js",
