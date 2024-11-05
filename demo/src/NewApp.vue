@@ -56,10 +56,15 @@ export default {
       chosenColor: null,
       alwaysScrollToBottom: true,
       messageStyling: true,
-      userIsTyping: false
+      userIsTyping: false,
+      overflow: 'auto'
     }
   },
   computed: {
+    isMobile() {
+      // check is mobile 
+      return window.innerWidth < 768;
+    },
     linkColor() {
       return this.chosenColor === 'dark' ? this.colors.sentMessage.text : this.colors.launcher.bg
     },
@@ -118,10 +123,20 @@ export default {
       }
     },
     openChat() {
+      // 如果是移动端，且为移动端，禁止滚动
+      if (this.isMobile) {
+        this.overflow = window.getComputedStyle(document.body).overflow
+        console.log('get overflow', this.overflow)
+        document.body.style.overflow = 'hidden'
+      }
       this.isChatOpen = true
       this.newMessagesCount = 0
     },
     closeChat() {
+      if (this.isMobile) {
+        console.log('overflow', this.overflow)
+        document.body.style.overflow = this.overflow
+      }
       this.isChatOpen = false
     },
     setColor(color) {
