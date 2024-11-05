@@ -20,15 +20,15 @@ export default {
 <style scoped>
 .sc-typing-indicator {
   text-align: center;
-  padding: 17px 20px;
+  padding: 2px 6px 4px;
   border-radius: 6px;
 }
 
 .sc-typing-indicator span {
   display: inline-block;
-  background-color: #b6b5ba;
-  width: 10px;
-  height: 10px;
+  background-color: rgb(16, 16, 192);
+  width: 4px;
+  height: 4px;
   border-radius: 100%;
   margin-right: 3px;
   animation: bob 2s infinite;

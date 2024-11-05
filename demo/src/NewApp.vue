@@ -90,8 +90,6 @@ export default {
         text.length > 0 ? this.participants[this.participants.length - 1].id : ''
     },
     async onMessageWasSent(message) {
-      // 向服务器发送信息，收到返回内容后，再重新渲染message
-      // todo later
       const text = message?.data?.text
       try {
         // 添加一条信息
@@ -113,7 +111,7 @@ export default {
           type: 'text',
           author: 'support',
           id: Math.random(),
-          data: {text: result.content}
+          data: {text: result?.content}
         }
       } catch (e) {
         console.error('error!', e)
@@ -156,8 +154,8 @@ export default {
 
 <style>
 body {
-  padding: 0px;
-  margin: 0px;
+  padding: 0;
+  margin: 0;
 }
 
 * {
