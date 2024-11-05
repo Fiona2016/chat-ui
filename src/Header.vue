@@ -63,10 +63,10 @@ export default {
 
 <style scoped>
 .sc-header {
-  min-height: 75px;
-  border-top-left-radius: 9px;
-  border-top-right-radius: 9px;
-  padding: 10px;
+  min-height: 50px;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+  padding: 8px;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
   position: relative;
   box-sizing: border-box;
@@ -81,10 +81,10 @@ export default {
 
 .sc-header--title {
   align-self: center;
-  padding: 10px;
+  padding: 6px;
   flex: 1;
   user-select: none;
-  font-size: 20px;
+  font-size: 16px;
 }
 
 .sc-header--title.enabled {
@@ -100,15 +100,10 @@ export default {
   width: 40px;
   align-self: center;
   height: 40px;
-  margin-right: 10px;
   box-sizing: border-box;
   cursor: pointer;
   border-radius: 5px;
   margin-left: auto;
-}
-
-.sc-header--close-button:hover {
-  box-shadow: 0px 2px 5px rgba(0.2, 0.2, 0.5, 0.1);
 }
 
 .sc-header--close-button img {
