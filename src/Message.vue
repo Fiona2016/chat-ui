@@ -4,7 +4,7 @@
       class="sc-message--content"
       :class="{
         sent: message.author === 'me',
-        received: message.author !== 'me' && message.type !== 'system',
+        received: message.type !== 'system',
         system: message.type === 'system'
       }"
     >
