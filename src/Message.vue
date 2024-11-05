@@ -132,7 +132,7 @@ export default {
 
 <style lang="scss">
 .sc-message {
-  width: 300px;
+  width: 330px;
   margin: auto;
   padding-bottom: 10px;
   display: flex;
@@ -147,6 +147,7 @@ export default {
 .sc-message--content {
   width: 100%;
   display: flex;
+  margin-right: 40px;
 }
 
 .sc-message--content.sent {
@@ -186,7 +187,7 @@ export default {
 }
 
 .sc-message--text {
-  padding: 5px 20px;
+  padding: 5px 0;
   border-radius: 6px;
   font-weight: 300;
   font-size: 14px;
@@ -245,7 +246,7 @@ export default {
 .sc-message--content.received .sc-message--text {
   color: #263238;
   background-color: #f4f7f9;
-  margin-right: 40px;
+  //margin-right: 40px;
 }
 
 .tooltip {

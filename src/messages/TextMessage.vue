@@ -119,7 +119,7 @@ export default {
 
 <style scoped lang="scss">
 .sc-message--text {
-  padding: 5px 20px;
+  padding: 10px;
   border-radius: 6px;
   font-weight: 300;
   font-size: 14px;
@@ -173,7 +173,7 @@ export default {
 .sc-message--content.received .sc-message--text {
   color: #263238;
   background-color: #f4f7f9;
-  margin-right: 40px;
+  //margin-right: 40px;
 }
 
 a.chatLink {
