@@ -271,6 +271,7 @@ export default {
 
 <style scoped>
 .sc-launcher {
+  z-index: 100;
   width: 40px;
   height: 40px;
   background-position: center;
@@ -296,6 +297,7 @@ export default {
 
 .sc-launcher .sc-open-icon,
 .sc-launcher .sc-closed-icon {
+  z-index: 100;
   width: 40px;
   height: 40px;
   position: fixed;
