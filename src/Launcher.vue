@@ -162,6 +162,10 @@ export default {
       type: Function,
       required: true
     },
+    blockSubmit: {
+      type: Boolean,
+      default: false
+    },
     messageList: {
       type: Array,
       default: () => []

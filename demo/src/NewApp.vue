@@ -18,6 +18,7 @@
       :confirmation-deletion-message="'Are you sure? (you can customize this message)'"
       :title-image-url="titleImageUrl"
       :disable-user-list-toggle="true"
+      :block-submit="blockSubmit"
       placeholder="输入您的问题，然后按回车"
       @onType="handleOnType"
       @edit="editMessage"
@@ -57,7 +58,8 @@ export default {
       alwaysScrollToBottom: true,
       messageStyling: true,
       userIsTyping: false,
-      overflow: 'auto'
+      overflow: 'auto',
+      blockSubmit: false
     }
   },
   computed: {
@@ -109,7 +111,8 @@ export default {
               author: 'support'
             }
           )
-        ]
+        ]      
+        this.blockSubmit = true
         // 发送请求
         const result = await sendPrompt(text)
         this.messageList[this.messageList.length - 1] = {
@@ -118,6 +121,7 @@ export default {
           id: Math.random(),
           data: {text: result?.content}
         }
+        this.blockSubmit = false
       } catch (e) {
         console.error('error!', e)
       }

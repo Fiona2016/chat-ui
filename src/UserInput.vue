@@ -67,8 +67,9 @@
             <IconOk />
           </UserInputButton>
           <UserInputButton
+            :disabled="isBlockSubmit"
             v-else
-            :color="colors.userInput.text"
+            :color="inputIconColor"
             tooltip="Send"
             @click.native.prevent="_submitText"
           >
@@ -151,16 +152,23 @@ export default {
     return {
       file: null,
       inputActive: false,
-      prevSelectionRange: null
+      prevSelectionRange: null,
     }
   },
   computed: {
+    isBlockSubmit() {
+      return store.state.blockSubmit
+    },
+    inputIconColor() {
+      // fixme color 统一抽取到全局变量里管理
+      return store.state.blockSubmit ? '#aaa' :  '#4e8cff'
+    },
     editMessageId() {
       return this.isEditing && store.state.editMessage.id
     },
     isEditing() {
       return store.state.editMessage && store.state.editMessage.id
-    }
+    },
   },
   watch: {
     editMessageId(m) {
@@ -204,8 +212,13 @@ export default {
       this.inputActive = onoff
     },
     handleKey(event) {
+      
       if (event.keyCode === 13 && !event.shiftKey) {
         if (!this.isEditing) {
+          if (this.isBlockSubmit) {
+            event.preventDefault()
+            return false
+          }
           this._submitText(event)
         } else {
           this._editText(event)
@@ -250,12 +263,13 @@ export default {
         this._submitTextWhenFile(event, text, file)
       } else {
         if (text && text.length > 0) {
+          this.$refs.userInput.innerHTML = ''
           this._checkSubmitSuccess(
             this.onSubmit({
               author: 'me',
               type: 'text',
               data: {text}
-            })
+            })  
           )
         }
       }

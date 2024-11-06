@@ -26,7 +26,6 @@
     </div>
 
     <slot :message="message" :messageText="messageText" :messageColors="messageColors" :me="me">
-      hello 这里是渲染的内容测试一下
       <div class="sc-message--text-content" v-html="messageText"></div>
       <p v-if="message.data.meta" class="sc-message--meta" :style="{color: messageColors.color}">
         {{ message.data.meta }}
