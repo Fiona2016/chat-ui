@@ -1,5 +1,6 @@
 ifProd = () => process.env.NODE_ENV === 'production'
 const path = require('path')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
   lintOnSave: false,
@@ -7,19 +8,20 @@ module.exports = {
   outputDir: 'demo/dist',
   assetsDir: 'static',
   publicPath: '/demo/dist/',
-  pages: {
-    index: {
-      entry: 'demo/src/main.js',
-      template: 'demo/public/index.html',
-      filename: 'index.html'
-    }
-  },
   configureWebpack: {
+    entry: 'demo/src/main.js',
     resolve: {
       alias: {
         '@/dist': path.resolve(__dirname)
       }
-    }
+    },
+    plugins: [
+      new HtmlWebpackPlugin({
+        template: path.resolve(__dirname, 'demo/public/index.html'),
+        filename: 'index.html',
+        inject: true
+      })
+    ]
   },
   chainWebpack: (config) => {
     // Inline images & svgs into build
