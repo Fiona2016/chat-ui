@@ -68,7 +68,7 @@ import FileMessage from './messages/FileMessage.vue'
 import EmojiMessage from './messages/EmojiMessage.vue'
 import TypingMessage from './messages/TypingMessage.vue'
 import SystemMessage from './messages/SystemMessage.vue'
-import chatIcon from './assets/chat-icon.svg'
+const visitorIcon = 'data:image/png;base64,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'
 
 export default {
   components: {
@@ -109,7 +109,7 @@ export default {
       return this.user && this.user.name
     },
     chatImageUrl() {
-      return (this.user && this.user.imageUrl) || chatIcon
+      return (this.user && this.user.imageUrl) || visitorIcon
     },
     messageColors() {
       return this.message.author === 'me' ? this.sentColorsStyle : this.receivedColorsStyle
@@ -151,7 +151,9 @@ export default {
 }
 
 .sc-message--content.sent {
-  justify-content: flex-end;
+  justify-content: end;
+  flex-direction: row-reverse;
+  margin-right: 0;
 }
 
 .sc-message--content.system {
@@ -159,7 +161,7 @@ export default {
 }
 
 .sc-message--content.sent .sc-message--avatar {
-  display: none;
+  margin: 0 0 0 10px;
 }
 
 .sc-message--avatar {
@@ -169,7 +171,7 @@ export default {
   min-width: 30px;
   min-height: 30px;
   border-radius: 50%;
-  align-self: center;
+  align-self: start;
   margin-right: 15px;
 }
 
