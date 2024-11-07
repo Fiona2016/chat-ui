@@ -441,7 +441,7 @@ export default {
   left: 0;
   top: 0;
   width: 100%;
-  z-index: 99999;
+  z-index: 9999999;
   height: 100%;
   opacity: 0;
   cursor: pointer;
