@@ -40,6 +40,7 @@ import messageHistory from './messageHistory'
 import chatParticipants from './chatProfiles'
 import availableColors from './colors'
 import {sendPrompt} from './request/message'
+import {REQUEST_ERROR_MAP} from './const/const'
 
 export default {
   name: 'App',
@@ -96,6 +97,30 @@ export default {
       this.showTypingIndicator =
         text.length > 0 ? this.participants[this.participants.length - 1].id : ''
     },
+    async handleSendMessage(text) {
+      this.blockSubmit = true
+        // 发送请求
+        try {
+          const result = await sendPrompt(text)
+          this.messageList[this.messageList.length - 1] = {
+          type: 'text',
+          author: 'support',
+          id: Math.random(),
+          data: {text: result?.content}
+        }
+        } catch (e) {
+          // 根据status输出不同的错误类型
+          const errorText = REQUEST_ERROR_MAP[e.response?.status] || '出错了，请稍后再试'
+          this.messageList[this.messageList.length - 1] = {
+            type: 'text',
+            author: 'support',
+            id: Math.random(),
+            data: {text: errorText}
+          }
+          console.error('error!', e)
+        }
+        this.blockSubmit = false
+    },
     async onMessageWasSent(message) {
       const text = message?.data?.text
       try {
@@ -111,17 +136,8 @@ export default {
               author: 'support'
             }
           )
-        ]      
-        this.blockSubmit = true
-        // 发送请求
-        const result = await sendPrompt(text)
-        this.messageList[this.messageList.length - 1] = {
-          type: 'text',
-          author: 'support',
-          id: Math.random(),
-          data: {text: result?.content}
-        }
-        this.blockSubmit = false
+        ]
+        await this.handleSendMessage(text)
       } catch (e) {
         console.error('error!', e)
       }

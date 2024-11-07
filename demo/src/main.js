@@ -12,7 +12,7 @@ createDom()
 app.mount('#ai-chat-ui')
 
 export function createDom() {
-  const appElement = document.createElement('div');
-  appElement.id = 'ai-chat-ui';
-  document.body.insertBefore(appElement, document.body.firstChild);
+  const appElement = document.createElement('div')
+  appElement.id = 'ai-chat-ui'
+  document.body.insertBefore(appElement, document.body.firstChild)
 }

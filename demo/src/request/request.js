@@ -13,9 +13,6 @@ instance.interceptors.request.use(
   (config) => {
     console.log('config', config)
     // 在发送请求之前做些什么
-    console.log('config.request', config.request)
-    console.log('Sending request to:', config.url)
-    console.log('config.data', config.data)
     // 如果有sessionId，每次发送前带上
     if (sessionId) {
       config.data['session_id'] = sessionId
