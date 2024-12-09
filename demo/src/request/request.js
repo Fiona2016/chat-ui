@@ -20,7 +20,6 @@ instance.interceptors.request.use(
     // 例如，添加一个 Authorization 头部
     // 🤷🏻‍♀️ 先改为在params里面加
     config.headers.authentication = JWT
-    // config.params = {authentication: JWT}
     return config
   },
   (error) => {

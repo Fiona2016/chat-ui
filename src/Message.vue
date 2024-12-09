@@ -189,6 +189,8 @@ export default {
 }
 
 .sc-message--text {
+  max-width: calc(100% - 60px);
+  word-break: break-word;
   padding: 5px 0;
   border-radius: 6px;
   font-weight: 300;
