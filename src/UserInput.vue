@@ -92,6 +92,7 @@ import store from './store/'
 import IconCross from './components/icons/IconCross.vue'
 import IconOk from './components/icons/IconOk.vue'
 import IconSend from './components/icons/IconSend.vue'
+import {TEXT_MAX_LENGTH} from './const/const'
 
 export default {
   components: {
@@ -104,6 +105,10 @@ export default {
     IconSend
   },
   props: {
+    messageList: {
+      type: Array,
+      default: () => []
+    },
     icons: {
       type: Object,
       default: function () {
@@ -256,12 +261,29 @@ export default {
         this.$refs.userInput.innerHTML = ''
       }
     },
+    _toastMsg(msg) {
+      this.messageList.push({
+        type: 'text',
+        author: 'support',
+        id: Math.random(),
+        data: {text: msg}
+      })
+    },
     _submitText(event) {
       const text = this.$refs.userInput.textContent
       const file = this.file
       if (file) {
         this._submitTextWhenFile(event, text, file)
       } else {
+        // 如果text长度大于limit，进行提示
+        // 如果text长度等于0，说明是空输入，进行提示(暂不支持的输入类型，请重试)
+        if (text && text.length > TEXT_MAX_LENGTH) {
+          this._toastMsg(`输入长度不能超过${TEXT_MAX_LENGTH}个字符`)
+          return
+        } else if (text === '') {
+          this._toastMsg('暂不支持输入文件')
+          return
+        }
         if (text && text.length > 0) {
           this.$refs.userInput.innerHTML = ''
           this._checkSubmitSuccess(
@@ -271,6 +293,8 @@ export default {
               data: {text}
             })  
           )
+        } else {
+          console.log('暂不支持输入文件')
         }
       }
     },

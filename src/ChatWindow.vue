@@ -46,6 +46,7 @@
     </MessageList>
     <UserInput
       v-if="!showUserList"
+      :messageList="messageList"
       :show-emoji="showEmoji"
       :show-emoji-in-text="showEmojiInText"
       :on-submit="onUserInputSubmit"
