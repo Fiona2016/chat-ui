@@ -2,7 +2,7 @@ import request from './request'
 import {responseBody} from './mock'
 import {aiAskUrl, aiAskUrlV2} from './config'
 import {SHOP_OWNER} from '../const/const'
-// import {fetchEventData} from 'fetch-sse'
+let sessionId = undefined // 首次会话不带session, 后续对话将session带过去
 
 export async function sendPrompt(message) {
   // mock
@@ -25,7 +25,8 @@ export async function sendPromptSSE(message, callBackFn) {
       body: JSON.stringify({
         shop_owner: SHOP_OWNER,
         prompt: message,
-        stream: 'True'
+        stream: 'True',
+        session_id: sessionId
       })
     })
     const stream = response.body
@@ -35,6 +36,9 @@ export async function sendPromptSSE(message, callBackFn) {
       const {value, done} = await reader.read()
       if (done) break
       const objArray = extractTextSSE(value)
+      if (!sessionId) {
+        sessionId = extractSessionId(objArray)
+      }
       objArray.forEach((obj) => {
         callBackFn(extractText(obj))
       })
@@ -45,6 +49,11 @@ export async function sendPromptSSE(message, callBackFn) {
     throw error('SSE request failed')
   }
 }
+
+function extractSessionId(objArray) {
+  return objArray[0]?.session_id || undefined
+}
+
 export function extractText(obj) {
   try {
     return obj?.choices[0]?.delta?.content || ''
