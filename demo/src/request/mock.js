@@ -7,3 +7,47 @@ export const request = {
   shop_owner: 'ym',
   prompt: '您好，请帮我介绍几个AI工具'
 }
+
+export const responseSSE_message = {
+  data: {
+    model: 'unknown',
+    id: 'a66e05da-e28b-4071-a8e7-e2435f82d10f',
+    object: 'chat.completion.chunk',
+    choices: [
+      {
+        delta: {role: 'assistant', content: '<p>当然可以。'},
+        finish_reason: null,
+        index: 0,
+        logprobs: null
+      }
+    ],
+    created: 1737366130,
+    system_fingerprint: 'fp_rT5lKi1We',
+    usage: {prompt_tokens: 0, total_tokens: 0, completion_tokens: 0}
+  }
+}
+
+export const responseSSE_message_stop = {
+  model: 'unknown',
+  id: 'a66e05da-e28b-4071-a8e7-e2435f82d10f',
+  object: 'chat.completion.chunk',
+  choices: [
+    {
+      delta: {
+        role: null,
+        content: null
+      },
+      finish_reason: 'stop',
+      index: 0,
+      logprobs: null
+    }
+  ],
+  created: 1737366130,
+  system_fingerprint: 'fp_aqosZ41oA',
+  usage: {
+    prompt_tokens: 0,
+    total_tokens: 0,
+    completion_tokens: 0
+  }
+}
+export const responseSSE_message_end = '[DONE]'

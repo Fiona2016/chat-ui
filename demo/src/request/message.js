@@ -1,6 +1,6 @@
 import request from './request'
 import {responseBody} from './mock'
-import {aiAskUrl} from './config'
+import {aiAskUrl, aiAskUrlV2} from './config'
 import {SHOP_OWNER} from '../const/const'
 // import {fetchEventData} from 'fetch-sse'
 
@@ -14,25 +14,9 @@ export async function sendPrompt(message) {
 }
 
 export async function sendPromptSSE(message, callBackFn) {
-  // await fetchEventData('http://localhost:3000/streaming', {
-  //   method: 'POST',
-  //   data: {
-  //     shop_owner: SHOP_OWNER,
-  //     prompt: message
-  //   },
-  //   headers: {
-  //     'Content-Type': 'application/json',
-  //     'Authorization': 'Bearer token'
-  //   },
-  //   onMessage: (event) => {
-  //     console.log(event.data)
-  //     callBackFn(event.data)
-  //   }
-  // })
-
   try {
     // send a sse request
-    const response = await fetch('http://localhost:3000/streaming', {
+    const response = await fetch(aiAskUrlV2, {
       method: 'POST',
       withCredentials: true,
       headers: {
@@ -40,7 +24,8 @@ export async function sendPromptSSE(message, callBackFn) {
       },
       body: JSON.stringify({
         shop_owner: SHOP_OWNER,
-        prompt: message
+        prompt: message,
+        stream: 'True'
       })
     })
     const stream = response.body
@@ -49,12 +34,38 @@ export async function sendPromptSSE(message, callBackFn) {
     while (true) {
       const {value, done} = await reader.read()
       if (done) break
-      console.log(value)
-      callBackFn(value)
+      const objArray = extractTextSSE(value)
+      objArray.forEach((obj) => {
+        callBackFn(extractText(obj))
+      })
     }
     reader.read().then()
   } catch (error) {
     console.error(error)
     throw error('SSE request failed')
   }
+}
+export function extractText(obj) {
+  try {
+    return obj?.choices[0]?.delta?.content || ''
+  } catch (error) {
+    console.error(error)
+    throw new Error('Invalid JSON format')
+  }
+}
+
+export function extractTextSSE(dataString) {
+  const regex = /data:\s*({.*?})(?=\r\n|\r|\n|$)/gs
+  let match
+  const jsonObjects = []
+
+  while ((match = regex.exec(dataString)) !== null) {
+    try {
+      const jsonObject = JSON.parse(match[1])
+      jsonObjects.push(jsonObject)
+    } catch (error) {
+      console.error('Invalid JSON:', match[1])
+    }
+  }
+  return jsonObjects
 }
