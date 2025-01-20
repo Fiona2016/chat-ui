@@ -40,6 +40,7 @@ import messageHistory from './messageHistory'
 import chatParticipants from './chatProfiles'
 import availableColors from './colors'
 import {sendPrompt} from './request/message'
+import {sendPromptSSE} from './request/message'
 import {REQUEST_ERROR_MAP} from './const/const'
 
 export default {
@@ -97,17 +98,24 @@ export default {
       this.showTypingIndicator =
         text.length > 0 ? this.participants[this.participants.length - 1].id : ''
     },
+    onReceiveSSEMessage(message) {
+      console.log('message', message)
+      // 将message追加到result的最后一个元素中
+      const origin = this.messageList[this.messageList.length - 1].data.text
+      this.messageList[this.messageList.length - 1].data.text = origin + message
+    },
     async handleSendMessage(text) {
       this.blockSubmit = true
-        // 发送请求
         try {
-          const result = await sendPrompt(text)
+          let result = ''
           this.messageList[this.messageList.length - 1] = {
-          type: 'text',
-          author: 'support',
-          id: Math.random(),
-          data: {text: result?.content}
-        }
+            type: 'text',
+            author: 'support',
+            id: Math.random(),
+            data: {text: result}
+          }
+          // 发送sse请求，等结果，拿到结果后，进行追加展示
+          await sendPromptSSE(text, this.onReceiveSSEMessage)
         } catch (e) {
           // 根据status输出不同的错误类型
           const errorText = REQUEST_ERROR_MAP[e.response?.status] || '出错了，请稍后再试'
