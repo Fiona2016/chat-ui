@@ -61,7 +61,8 @@ export default {
       messageStyling: true,
       userIsTyping: false,
       overflow: 'auto',
-      blockSubmit: false
+      blockSubmit: false,
+      isRestart: false
     }
   },
   computed: {
@@ -99,21 +100,23 @@ export default {
         text.length > 0 ? this.participants[this.participants.length - 1].id : ''
     },
     onReceiveSSEMessage(message) {
-      console.log('message', message)
-      // 将message追加到result的最后一个元素中
+      if(!this.isRestart) {
+        this.messageList[this.messageList.length - 1] = {
+          type: 'text',
+          author: 'support',
+          id: Math.random(),
+          data: {text: message}
+        }
+        this.isRestart = true
+      } else {
+        // 将message追加到result的最后一个元素中
       const origin = this.messageList[this.messageList.length - 1].data.text
       this.messageList[this.messageList.length - 1].data.text = origin + message
+      }
     },
     async handleSendMessage(text) {
       this.blockSubmit = true
         try {
-          let result = ''
-          this.messageList[this.messageList.length - 1] = {
-            type: 'text',
-            author: 'support',
-            id: Math.random(),
-            data: {text: result}
-          }
           // 发送sse请求，等结果，拿到结果后，进行追加展示
           await sendPromptSSE(text, this.onReceiveSSEMessage)
         } catch (e) {
