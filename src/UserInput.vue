@@ -236,7 +236,11 @@ export default {
       }
     },
     handleInput(event) {
-      this.$emit('onType', event.target.textContent)
+      const content = event.target.textContent
+      this.$emit('onType', content)
+      if (content.trim() === '') {
+        this.$refs.userInput.innerHTML = ''
+      }
     },
     focusUserInput() {
       this.$nextTick(() => {
