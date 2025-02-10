@@ -117,6 +117,7 @@ export default {
     async handleSendMessage(text) {
       this.blockSubmit = true
         try {
+          this.isRestart = false
           // 发送sse请求，等结果，拿到结果后，进行追加展示
           await sendPromptSSE(text, this.onReceiveSSEMessage)
         } catch (e) {
